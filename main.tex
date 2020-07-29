@@ -25,7 +25,8 @@
 
 \usepackage{listings} % code formatting
 \lstdefinestyle{my}{
-    keywordstyle=\sffamily\bfseries,
+    basicstyle = \ttfamily,
+    keywordstyle=\ttfamily,
     language=bash,
     % morekeywords={
     % },
@@ -34,12 +35,10 @@
     commentstyle=\linespread{1.15}\footnotesize\color{olive},
     frame=tlbr, framesep=0.1cm, 
     }
-\lstdefinestyle{inline}{
-    basicstyle=\bfseries,
-    backgroundcolor=\color{backg}
-    }
+
 \lstset{style=my}
-\newcommand{\inline}[1]{\lstinline[style=inline]{#1}}
+
+\newcommand{\inline}[1]{\colorbox{backg}{\lstinline{#1}}}
 \usepackage{dirtree} 
 \newcommand{\qq}[1]{\glqq#1\grqq\xspace}
 
