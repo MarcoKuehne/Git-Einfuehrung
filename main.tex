@@ -5,9 +5,15 @@
 \usepackage[T1]{fontenc}
 \usepackage{fontspec}
 \usepackage[ngerman]{babel}
+% Bibliography for lua:
+\usepackage[
+backend=biber,
+bibencoding=utf8
+]{biblatex}
+\addbibresource{Bibliothek.bib}
 
-\usepackage[numbers]{natbib} %definition for citation within the text (alternativ option: "numbers"
-\bibliographystyle{plain}
+%\usepackage[numbers]{natbib} %definition for citation within the text (alternativ option: "numbers"
+%\bibliographystyle{plain}
 \usepackage{hyperref}
 
 %% Sets page size and margins
@@ -79,6 +85,6 @@
 \newpage
 \nocite{*}
 
-\bibliography{Bibliothek}
+\printbibliography
 
 \end{document}
