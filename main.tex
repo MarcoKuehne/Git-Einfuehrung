@@ -1,0 +1,83 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[ngerman]{babel}
+
+\usepackage[numbers]{natbib} %definition for citation within the text (alternativ option: "numbers"
+\bibliographystyle{plain}
+\usepackage{hyperref}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2.5cm,left=3.5cm,right=2.5cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{wrapfig}
+
+\definecolor{backg}{rgb}{0.85,0.85,0.85}
+
+\usepackage{listings} % code formatting
+\lstdefinestyle{my}{
+    keywordstyle=\sffamily\bfseries,
+    language=bash,
+    % morekeywords={
+    % },
+    backgroundcolor=\color{backg},
+    numbers=left,
+    commentstyle=\linespread{1.15}\footnotesize\color{olive},
+    frame=tlbr, framesep=0.1cm, 
+    }
+\lstdefinestyle{inline}{
+    basicstyle=\bfseries,
+    backgroundcolor=\color{backg}
+    }
+\lstset{style=my}
+\newcommand{\inline}[1]{\lstinline[style=inline]{#1}}
+\usepackage{dirtree} 
+
+\makeatletter
+\title{Versionskontrollsystem Git}\let\Title\@title
+\author{Till Hanke}          \let\Author\@author
+\date{\today}           \let\Date\@date
+\makeatother
+
+
+
+\begin{document}
+\input{Title.tex}
+\newpage
+\tableofcontents
+\newpage
+\input{Einleitung}
+
+\newpage
+\input{initialisierung}
+%
+\newpage
+\input{Commit}
+% änderungen und commits
+% - markdown
+%
+\section{branches und merging }
+% - mergeconflicts
+%
+\section{remotes}
+% - ssh custom server remote
+% - gitlab/github with https
+%
+\section{Kollaboration}
+% - pulls, pushes
+% - forking
+%
+\newpage
+\nocite{*}
+
+\bibliography{Bibliothek}
+
+\end{document}

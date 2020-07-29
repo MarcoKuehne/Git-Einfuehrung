@@ -1,0 +1,40 @@
+\section{Initialisierung eines lokalen .git}
+Git wird generell in dem Hauptordner eines Projektes initialisiert. Das bedeutet, dass alle Projekt zugehörigen Dateien in Unterordnern zu finden sein sollten (eine Exemplarische Ordnerstruktur ist in \ref{fig:dir_struc} dargestellt). Bei der Initialisierung von Git wird im Hauptordner ein neuer Unterordner  \lstinline[style=inline]{.git} angelegt in diesem Ordner wird Git alle Versionsinformationen abspeichern. Durch Löschen des Ordners kann man Git von dem Projekt trennen.
+\begin{figure}[!h]
+    \dirtree{%
+    .1 Projekt.
+    .2 .git.
+    .2 Code.
+    .3 Modules.
+    .3 GUI.
+    .2 README.md.
+    }
+    \caption{Exemplarische Ordnerstruktur für ein Projekt mit Git.}
+    \label{fig:dir_struc}
+\end{figure}
+
+Um in einem Projektordner git zu initialisieren genügt der Befehl 
+\begin{lstlisting}[style=my]
+git init
+\end{lstlisting}
+Dadurch wird in dem aktuellen Verzeichnis ein \lstinline[style=inline]{.git} Ordner angelegt.
+\subsection{Git Config}
+Um Änderungen zu protokollieren benötigt git Informationen über den User. Diese Informationen können System-übergreifend, pro User im System oder pro Projekt hinterlegt werden. Die benötigten Informationen sind Email-Adresse und Benutzername. Definiert werden können die Informationen mit Hilfe von \inline{git config}. Die Optionen \inline{--system}, \inline{--global} und \inline{--local} definieren ob, diese Information für das System, den User oder das Projekt abgespeichert werden sollen.
+\begin{lstlisting}
+$ git config --global user.name "Max Mustermann"
+$ git config --global user.email "max@mustermann.de"
+# Dieser Editor wird von git genutzt um Eingaben des Users ab zu fragen.
+$ git config --global core.editor vim  
+\end{lstlisting}
+Nach der Initialisierung kann der Status des Git mit \inline{git status} abgefragt werden.
+\begin{lstlisting}
+$ ls -a
+.  ..  Code  .git  README.md
+$ git status
+On branch master
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+\end{lstlisting}
+Durch diese Initialisierung wurde ein Git angelegt. Jedoch hat das Git noch keine Dateien, deren Verlauf protokolliert werden soll. Um Dateien der Versionskontrolle hinzu zu fügen müssen diese zu Git hinzugefügt werden. Das geschieht über den \inline{git add} Befehl.
