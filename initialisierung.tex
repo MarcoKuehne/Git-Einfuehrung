@@ -2,12 +2,18 @@
 Git wird generell in dem Hauptordner eines Projektes initialisiert. Das bedeutet, dass alle Projekt zugehörigen Dateien in Unterordnern zu finden sein sollten (eine Exemplarische Ordnerstruktur ist in \ref{fig:dir_struc} dargestellt). Bei der Initialisierung von Git wird im Hauptordner ein neuer Unterordner  \lstinline[style=inline]{.git} angelegt in diesem Ordner wird Git alle Versionsinformationen abspeichern. Durch Löschen des Ordners kann man Git von dem Projekt trennen.
 \begin{figure}[!h]
     \dirtree{%
-    .1 Projekt.
+    .1 Git-Basics.
     .2 .git.
-    .2 Code.
-    .3 Modules.
-    .3 GUI.
-    .2 README.md.
+    .3 \ldots \hspace{2ex}\begin{minipage}[t]{8cm}In diesem Ordner werden die Informationen über Änderungen abgespeichert\end{minipage}.
+    .2 Bilder.
+    .3 git\_commit.png.
+    .3 Versioncontrol.png.
+    .2 main.tex.
+    .2 Title.tex.
+    .2 initialisierung.tex.
+    .2 Einleitung.tex.
+    .2 Commit.tex.
+    .2 Bibliothek.tex.
     }
     \caption{Exemplarische Ordnerstruktur für ein Projekt mit Git.}
     \label{fig:dir_struc}
@@ -29,12 +35,71 @@ $ git config --global core.editor vim
 Nach der Initialisierung kann der Status des Git mit \inline{git status} abgefragt werden.
 \begin{lstlisting}
 $ ls -a
-.  ..  Code  .git  README.md
+.   Bibliothek.bib  Commit.tex      .git                 main.tex
+..  Bilder          Einleitung.tex  initialisierung.tex  Title.tex
 $ git status
 On branch master
 
 No commits yet
 
-nothing to commit (create/copy files and use "git add" to track)
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	Bibliothek.bib
+	Bilder/
+	Commit.tex
+	Einleitung.tex
+	Title.tex
+	initialisierung.tex
+	main.tex
+
+nothing added to commit but untracked files present (use "git add" to track)
+
 \end{lstlisting}
 Durch diese Initialisierung wurde ein Git angelegt. Jedoch hat das Git noch keine Dateien, deren Verlauf protokolliert werden soll. Um Dateien der Versionskontrolle hinzu zu fügen müssen diese zu Git hinzugefügt werden. Das geschieht über den \inline{git add} Befehl.
+\begin{lstlisting}
+$ git add main.tex
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   main.tex
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	Bibliothek.bib
+	Bilder/
+	Commit.tex
+	Einleitung.tex
+	Title.tex
+	initialisierung.tex
+\end{lstlisting}
+Meist sollten jedoch alle Dateien eines Projektes teil der Versionskontrolle sein, daher sollte man auch alle hinzufügen:
+\begin{lstlisting}
+$ git add .
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   Bibliothek.bib
+	new file:   Bilder/Versioncontrol.png
+	new file:   Bilder/git_commit.png
+	new file:   Commit.tex
+	new file:   Einleitung.tex
+	new file:   Title.tex
+	new file:   initialisierung.tex
+	new file:   main.tex
+
+\end{lstlisting}
+Damit wurden alle Dateien der Versionskontrolle hinzugefügt. In git nennt sich der Zustand, in dem die Dateien sich hier befinden \qq{Staging}. Noch hat git die Änderungen also nicht protokolliert, sondern nur die Dateien markiert um sie bei dem nächsten Commit zu protokollieren. Die vier Stadien, in denen sich eine Datei in git befinden kann sind in Abb. \ref{fig:lifecycle} dargestellt. Dieser \inline{git add} Befehl hat die Dateien von \qq{untracked} auf \qq{staged} gesetzt. Später wird gezeigt, dass der Befehl \inline{git add} immer den Status der Datei auf \qq{staged} setzt, egal ob sie neu hinzugefügt, oder verändert wurde.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{Bilder/lifecycle_de.png}
+    \caption{Die 4 Zustände, in denen eine Datei sich im git befinden kann. Die Pfeile geben an, wie die Dateien zwischen den Stadien wechseln. Das Bild wurde aus \cite{ProGit} entnommen und leicht verändert.}
+    \label{fig:lifecycle}
+\end{figure}
