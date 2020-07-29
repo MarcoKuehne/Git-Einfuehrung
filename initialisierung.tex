@@ -1,5 +1,5 @@
 \section{Initialisierung eines lokalen .git}
-Git wird generell in dem Hauptordner eines Projektes initialisiert. Das bedeutet, dass alle Projekt zugehörigen Dateien in Unterordnern zu finden sein sollten (eine Exemplarische Ordnerstruktur ist in \ref{fig:dir_struc} dargestellt). Bei der Initialisierung von Git wird im Hauptordner ein neuer Unterordner  \lstinline[style=inline]{.git} angelegt in diesem Ordner wird Git alle Versionsinformationen abspeichern. Durch Löschen des Ordners kann man Git von dem Projekt trennen.
+Git wird generell in dem Hauptordner eines Projektes initialisiert. Das bedeutet, dass alle Projekt zugehörigen Dateien in Unterordnern zu finden sein sollten (eine Exemplarische Ordnerstruktur ist in \ref{fig:dir_struc} dargestellt). Bei der Initialisierung von Git wird im Hauptordner ein neuer Unterordner  \inline{.git} angelegt in diesem Ordner wird Git alle Versionsinformationen abspeichern. Durch Löschen des Ordners kann man Git von dem Projekt trennen.
 \begin{figure}[!h]
     \dirtree{%
     .1 Git-Basics.
@@ -20,10 +20,10 @@ Git wird generell in dem Hauptordner eines Projektes initialisiert. Das bedeutet
 \end{figure}
 
 Um in einem Projektordner git zu initialisieren genügt der Befehl 
-\begin{lstlisting}[style=my]
+\begin{lstlisting}
 git init
 \end{lstlisting}
-Dadurch wird in dem aktuellen Verzeichnis ein \lstinline[style=inline]{.git} Ordner angelegt.
+Dadurch wird in dem aktuellen Verzeichnis ein \inline{.git} Ordner angelegt.
 \subsection{Git Config}
 Um Änderungen zu protokollieren benötigt git Informationen über den User. Diese Informationen können System-übergreifend, pro User im System oder pro Projekt hinterlegt werden. Die benötigten Informationen sind Email-Adresse und Benutzername. Definiert werden können die Informationen mit Hilfe von \inline{git config}. Die Optionen \inline{--system}, \inline{--global} und \inline{--local} definieren ob, diese Information für das System, den User oder das Projekt abgespeichert werden sollen.
 \begin{lstlisting}
