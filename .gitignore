@@ -8,4 +8,7 @@ main.pdf
 main.run.xml
 main.synctex.gz
 main.toc
-
+*.swp
+.DS_Store
+*~
+*.bak
