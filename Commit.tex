@@ -1,4 +1,5 @@
-\section{Erster Commit}
+\section{Commit}
+\subsection{Erster Commit}
 \begin{lstlisting}
 $ git status
 On branch master
@@ -86,10 +87,95 @@ nothing added to commit but untracked files present (use "git add" to track)
 \end{lstlisting}
 ignoriert git alle aufgelisteten Dateien und findet nur noch die neue Datei \inline{.gitignore}.
 
+\subsection{Zurücksetzen auf vorhergehenden Commit}
+In diesem Abschnitt wird kurz erklärt, wie ein Verlauf der Commits angezeigt werden kann, und wie man das Projekt auf einen bestimmten Commit zurücksetzen kann.
 
+Um ein Projekt zurücksetzen zu können muss man den ziel-Commit identifizieren können. Dafür ist jedem Commit ein eineindeutiger Hash zugewiesen. Diese Hashs\footnote{Git nutzt für die Hashs SHA1 Checksummen von sogenannten \qq{blobs} der Commits. Weitere Informationen dazu können in \cite{ProGit} gefunden werden.} können mit \inline{git log} angezeigt werden:
+\begin{lstlisting}
+$ git log
+commit b7c5da73f9fce4176f37c5af0e929107da168adb (HEAD -> master)
+Author: Till Hanke <till.hanke@student.uni-halle.de>
+Date:   Wed Jul 29 16:20:47 2020 +0200
 
+    style: change listings style
+    
+    basicstyle of listings is set to small.
 
+commit b0002ceccd3566f61c3b33772ebd0ac286f9013f
+Author: Till Hanke <till.hanke@student.uni-halle.de>
+Date:   Wed Jul 29 16:15:20 2020 +0200
 
+    add: gitignore with all aux files listed
+
+commit 016591903c23f9a66e76a699139cc93918ea17a6
+Author: Till Hanke <till.hanke@student.uni-halle.de>
+Date:   Wed Jul 29 16:13:19 2020 +0200
+
+    intermediate: commit to clear git status
+\end{lstlisting}
+Hier sieht man einen kurzen Auszug des Projektes. Der oberste Commit ist immer der aktuelle \qq{HEAD}. Erkennbar ist es daran, dass hinter dem Hash des Commits \inline{HEAD -> master} steht. Master ist ein Verweis auf den aktuellen Branch (was das bedeutet wird in Kapitel \ref{sec:branch} erklärt).
+
+Unter dem Hash des Commits steht der Autor, welcher den Commit veröffentlicht hat (auf die Möglichkeit kooperative Gits zu führen wird in \ref{sec:coop} eingegangen) und dessen Email.
+Außerdem ist der Zeitstempel des Commits angegeben. Zuletzt und eingerückt wird der Header des Commits ausgegeben.
+
+Um eine abgekürzte Version des Logs zu sehen kann folgender Befehl genutzt werden:
+\begin{lstlisting}
+$ git log --pretty=format:"%h %s" --graph
+* b7c5da7 style: change listings style
+* b0002ce add: gitignore with all aux files listed
+* 0165919 intermediate: commit to clear git status
+* 3421046 add: subsection about gitignore
+* 8608c08 add: final part of commit section
+* bcdca21 remove: lstlisting styles removed
+* a1f688c change: example to this repo
+* 5f88588 style: change the lstlisting style
+* bbd3124 change: bibentry of progit and conv-commit
+* 7725671 add: image on lifecycle
+* 4603162 add: german quotes
+* 336c6f7 change: example directory tree to this repo
+* 065aa64 add: include ProGit in bib file
+* 8d16b1b init: initial commit for the project
+\end{lstlisting}
+
+Wenn der korrekte Hash gefunden wurde (z.B. \inline{016591903})  kann der Master Branch darauf zurückgesetzt werden indem man \inline{git reset} nutzt. Dabei muss nicht der gesamte Hash angegeben werden, sondern nur so viel, dass der Commit eindeutig identifiziert ist.
+\begin{lstlisting}
+$ git reset --hard 3421046
+HEAD is now at 3421046 add: subsection about gitignore
+$ git log --pretty=format:"%h %s" --graph
+* 3421046 add: subsection about gitignore
+* 8608c08 add: final part of commit section
+* bcdca21 remove: lstlisting styles removed
+* a1f688c change: example to this repo
+* 5f88588 style: change the lstlisting style
+* bbd3124 change: bibentry of progit and conv-commit
+* 7725671 add: image on lifecycle
+* 4603162 add: german quotes
+* 336c6f7 change: example directory tree to this repo
+* 065aa64 add: include ProGit in bib file
+* 8d16b1b init: initial commit for the project
+\end{lstlisting}
+In dem Log ist zu erkennen, dass die letzten drei Commits nun weg sind. Jedoch sind auch diese Commits hier nicht verloren, sondern können mit demselben Befehl wiederhergestellt werden. Dafür wird nur der Hash des Commits benötigt, der wiederhergestellt werden soll. Diese Commits können im erweiterten Log (\inline{git reflog}) gefunden werden:
+\begin{lstlisting}
+$ git reflog
+3421046 (HEAD -> master) HEAD@{0}: reset: moving to 3421046
+b7c5da7 HEAD@{1}: commit: style: change listings style
+b0002ce HEAD@{2}: commit: add: gitignore with all aux files listed
+0165919 HEAD@{3}: commit: intermediate: commit to clear git status
+3421046 (HEAD -> master) HEAD@{4}: commit: add: subsection about gitignore
+8608c08 HEAD@{5}: reset: moving to 8608c08eddc0fb893ccd88887889900b29aa6122
+b8f2753 HEAD@{6}: commit: add: subsection about gitignore
+8608c08 HEAD@{7}: commit: add: final part of commit section
+bcdca21 HEAD@{8}: commit: remove: lstlisting styles removed
+a1f688c HEAD@{9}: commit: change: example to this repo
+5f88588 HEAD@{10}: commit: style: change the lstlisting style
+bbd3124 HEAD@{11}: commit: change: bibentry of progit and conv-commit
+7725671 HEAD@{12}: commit: add: image on lifecycle
+4603162 HEAD@{13}: commit: add: german quotes
+336c6f7 HEAD@{14}: commit: change: example directory tree to this repo
+065aa64 HEAD@{15}: commit: add: include ProGit in bib file
+8d16b1b HEAD@{16}: commit (initial): init: initial commit for the project
+\end{lstlisting}
+In diesem Log sind alle Aktionen des Gits aufgelistet. Es ist zu sehen, dass der Commit, auf den der master Branch gerade verweist zweimal vorkommt (Zeile 2 und Zeile 6). Zwischen diesen beiden Einträgen sind die vorhergehenden Commits zu sehen.
 
 
 
