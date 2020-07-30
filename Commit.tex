@@ -120,39 +120,23 @@ Außerdem ist der Zeitstempel des Commits angegeben. Zuletzt und eingerückt wir
 
 Um eine abgekürzte Version des Logs zu sehen kann folgender Befehl genutzt werden:
 \begin{lstlisting}
-$ git log --pretty=format:"%h %s" --graph
-* b7c5da7 style: change listings style
-* b0002ce add: gitignore with all aux files listed
-* 0165919 intermediate: commit to clear git status
-* 3421046 add: subsection about gitignore
-* 8608c08 add: final part of commit section
-* bcdca21 remove: lstlisting styles removed
-* a1f688c change: example to this repo
-* 5f88588 style: change the lstlisting style
-* bbd3124 change: bibentry of progit and conv-commit
-* 7725671 add: image on lifecycle
-* 4603162 add: german quotes
-* 336c6f7 change: example directory tree to this repo
-* 065aa64 add: include ProGit in bib file
-* 8d16b1b init: initial commit for the project
+$ git log --pretty=format:"%h %s" 
+b7c5da7 style: change listings style
+b0002ce add: gitignore with all aux files listed
+0165919 intermediate: commit to clear git status
+3421046 add: subsection about gitignore
+8608c08 add: final part of commit section
+bcdca21 remove: lstlisting styles removed
 \end{lstlisting}
 
 Wenn der korrekte Hash gefunden wurde (z.B. \inline{016591903})  kann der Master Branch darauf zurückgesetzt werden indem man \inline{git reset} nutzt. Dabei muss nicht der gesamte Hash angegeben werden, sondern nur so viel, dass der Commit eindeutig identifiziert ist.
 \begin{lstlisting}
 $ git reset --hard 3421046
 HEAD is now at 3421046 add: subsection about gitignore
-$ git log --pretty=format:"%h %s" --graph
-* 3421046 add: subsection about gitignore
-* 8608c08 add: final part of commit section
-* bcdca21 remove: lstlisting styles removed
-* a1f688c change: example to this repo
-* 5f88588 style: change the lstlisting style
-* bbd3124 change: bibentry of progit and conv-commit
-* 7725671 add: image on lifecycle
-* 4603162 add: german quotes
-* 336c6f7 change: example directory tree to this repo
-* 065aa64 add: include ProGit in bib file
-* 8d16b1b init: initial commit for the project
+$ git log --pretty=format:"%h %s" 
+3421046 add: subsection about gitignore
+8608c08 add: final part of commit section
+bcdca21 remove: lstlisting styles removed
 \end{lstlisting}
 In dem Log ist zu erkennen, dass die letzten drei Commits nun weg sind. Jedoch sind auch diese Commits hier nicht verloren, sondern können mit demselben Befehl wiederhergestellt werden. Dafür wird nur der Hash des Commits benötigt, der wiederhergestellt werden soll. Diese Commits können im erweiterten Log (\inline{git reflog}) gefunden werden:
 \begin{lstlisting}
@@ -166,14 +150,6 @@ b0002ce HEAD@{2}: commit: add: gitignore with all aux files listed
 b8f2753 HEAD@{6}: commit: add: subsection about gitignore
 8608c08 HEAD@{7}: commit: add: final part of commit section
 bcdca21 HEAD@{8}: commit: remove: lstlisting styles removed
-a1f688c HEAD@{9}: commit: change: example to this repo
-5f88588 HEAD@{10}: commit: style: change the lstlisting style
-bbd3124 HEAD@{11}: commit: change: bibentry of progit and conv-commit
-7725671 HEAD@{12}: commit: add: image on lifecycle
-4603162 HEAD@{13}: commit: add: german quotes
-336c6f7 HEAD@{14}: commit: change: example directory tree to this repo
-065aa64 HEAD@{15}: commit: add: include ProGit in bib file
-8d16b1b HEAD@{16}: commit (initial): init: initial commit for the project
 \end{lstlisting}
 In diesem Log sind alle Aktionen des Gits aufgelistet. Es ist zu sehen, dass der Commit, auf den der master Branch gerade verweist zweimal vorkommt (Zeile 2 und Zeile 6). Zwischen diesen beiden Einträgen sind die vorhergehenden Commits zu sehen. Es sind auch die beiden scheinbar verloren gegangenen Commits wieder zu sehen.
 
