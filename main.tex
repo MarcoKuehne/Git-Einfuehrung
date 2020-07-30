@@ -39,14 +39,18 @@ bibencoding=utf8
     backgroundcolor=\color{backg},
     numbers=left,
     commentstyle=\linespread{1.15}\footnotesize\color{olive},
-    frame=tlbr, framesep=0.1cm, 
+    frame=tlbr, framesep=0.1cm
     }
 
 \lstset{style=my}
 
+\lstnewenvironment{mplisting}
+{\newline\minipage[t]{\linewidth}}
+{\endminipage \newline}
+
 \newcommand{\inline}[1]{\colorbox{backg}{\lstinline{#1}}}
 \usepackage{dirtree} 
-\newcommand{\qq}[1]{\glqq#1\grqq\xspace}
+\newcommand{\qq}[1]{\textit{\glqq#1\grqq}\xspace}
 
 \makeatletter
 \title{Versionskontrollsystem Git}\let\Title\@title
@@ -69,16 +73,14 @@ bibencoding=utf8
 \newpage
 \input{Commit}
 %
+\newpage
 \input{branches}
 % - mergeconflicts not yet included
 %
+\newpage
 \input{remotes}
 % - ssh custom server remote
 % - gitlab/github with https
-%
-\section{Kollaboration} \label{sec:coop}
-% - pulls, pushes
-% - forking
 %
 \newpage
 \nocite{*}
