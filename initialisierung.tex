@@ -1,5 +1,5 @@
 \section{Initialisierung eines lokalen .git}
-Git wird generell in dem Hauptordner eines Projektes initialisiert. Das bedeutet, dass alle Projekt zugehörigen Dateien in Unterordnern zu finden sein sollten (eine Exemplarische Ordnerstruktur ist in \ref{fig:dir_struc} dargestellt). Bei der Initialisierung von Git wird im Hauptordner ein neuer Unterordner  \inline{.git} angelegt in diesem Ordner wird Git alle Versionsinformationen abspeichern. Durch Löschen des Ordners kann man Git von dem Projekt trennen.
+Git muss in dem Hauptordner eines Projektes initialisiert werden. Das bedeutet, dass alle Projekt-Dateien in Unterordnern zu finden sein müssen (eine Exemplarische Ordnerstruktur ist in \ref{fig:dir_struc} dargestellt). Bei der Initialisierung von Git wird im Hauptordner zusätzlich ein neuer Unterordner  \inline{.git/} angelegt. In diesem Ordner wird Git alle Versionsinformationen und die Historie abspeichern. Durch Löschen des Ordners kann man Git von dem Projekt trennen.
 \begin{figure}[!h]
     \dirtree{%
     .1 Git-Basics.
@@ -19,21 +19,21 @@ Git wird generell in dem Hauptordner eines Projektes initialisiert. Das bedeutet
     \label{fig:dir_struc}
 \end{figure}
 
-Um in einem Projektordner git zu initialisieren genügt der Befehl 
-\begin{lstlisting}
-git init
-\end{lstlisting}
+Um in einem Projektordner Git zu initialisieren genügt der Befehl 
+\begin{mplisting}
+$ git init
+\end{mplisting}
 Dadurch wird in dem aktuellen Verzeichnis ein \inline{.git} Ordner angelegt.
+%
 \subsection{Git Config}
-Um Änderungen zu protokollieren benötigt git Informationen über den User. Diese Informationen können System-übergreifend, pro User im System oder pro Projekt hinterlegt werden. Die benötigten Informationen sind Email-Adresse und Benutzername. Definiert werden können die Informationen mit Hilfe von \inline{git config}. Die Optionen \inline{--system}, \inline{--global} und \inline{--local} definieren ob, diese Information für das System, den User oder das Projekt abgespeichert werden sollen.
-\begin{lstlisting}
+Um Änderungen zu protokollieren benötigt Git Informationen über den User. Diese Informationen können System-übergreifend, pro User oder für das jeweilige Projekt hinterlegt werden. Die benötigten Informationen sind Email-Adresse und Benutzername. Definiert werden können die Informationen mithilfe von \inline{git config}. Durch die Angabe einer Option wird definiert ob diese Information für das System (\inline{--system}), den User (\inline{--global}) oder das Projekt (\inline{--local}) abgespeichert werden sollen.
+\begin{mplisting}
 $ git config --global user.name "Max Mustermann"
 $ git config --global user.email "max@mustermann.de"
-# Dieser Editor wird von git genutzt um Eingaben des Users ab zu fragen.
-$ git config --global core.editor vim  
-\end{lstlisting}
+$ git config --global core.editor vim  # Dieser Editor wird von git genutzt um Eingaben des Users ab zu fragen.
+\end{mplisting}
 Nach der Initialisierung kann der Status des Git mit \inline{git status} abgefragt werden.
-\begin{lstlisting}
+\begin{mplisting}
 $ ls -a
 .   Bibliothek.bib  Commit.tex      .git                 main.tex
 ..  Bilder          Einleitung.tex  initialisierung.tex  Title.tex
@@ -54,9 +54,9 @@ Untracked files:
 
 nothing added to commit but untracked files present (use "git add" to track)
 
-\end{lstlisting}
-Durch diese Initialisierung wurde ein Git angelegt. Jedoch hat das Git noch keine Dateien, deren Verlauf protokolliert werden soll. Um Dateien der Versionskontrolle hinzu zu fügen müssen diese zu Git hinzugefügt werden. Das geschieht über den \inline{git add} Befehl.
-\begin{lstlisting}
+\end{mplisting}
+Durch diese Initialisierung wurde ein leeres Git-Repository angelegt. Jedoch hat das Repository noch keine Dateien, deren Verlauf protokolliert werden soll. Um Dateien der Versionskontrolle hinzu zu fügen müssen diese zum Repository hinzugefügt werden. Das geschieht über den \inline{git add} Befehl.
+\begin{mplisting}
 $ git add main.tex
 $ git status
 On branch master
@@ -75,9 +75,9 @@ Untracked files:
 	Einleitung.tex
 	Title.tex
 	initialisierung.tex
-\end{lstlisting}
-Meist sollten jedoch alle Dateien eines Projektes teil der Versionskontrolle sein, daher sollte man auch alle hinzufügen:
-\begin{lstlisting}
+\end{mplisting}
+Um alle Dateien des Ordners, und der Unterordner dem Repository hinzu zu fügen kann man den Hauptordner hinzufügen.
+\begin{mplisting}
 $ git add .
 $ git status
 On branch master
@@ -95,11 +95,11 @@ Changes to be committed:
 	new file:   initialisierung.tex
 	new file:   main.tex
 
-\end{lstlisting}
-Damit wurden alle Dateien der Versionskontrolle hinzugefügt. In git nennt sich der Zustand, in dem die Dateien sich hier befinden \qq{Staging}. Noch hat git die Änderungen also nicht protokolliert, sondern nur die Dateien markiert um sie bei dem nächsten Commit zu protokollieren. Die vier Stadien, in denen sich eine Datei in git befinden kann sind in Abb. \ref{fig:lifecycle} dargestellt. Dieser \inline{git add} Befehl hat die Dateien von \qq{untracked} auf \qq{staged} gesetzt. Später wird gezeigt, dass der Befehl \inline{git add} immer den Status der Datei auf \qq{staged} setzt, egal ob sie neu hinzugefügt, oder verändert wurde.
+\end{mplisting}
+Damit wurden alle Dateien der Versionskontrolle hinzugefügt. In Git nennt sich der Zustand, in dem die Dateien sich hier befinden \qq{Staging}. Noch hat Git die Änderungen nicht protokolliert, sondern nur die Dateien markiert um sie bei dem nächsten Commit zu protokollieren. Die vier Stadien, in denen sich eine Datei in Git befinden kann sind in Abb. \ref{fig:lifecycle} dargestellt. Der \inline{git add} Befehl hat die Dateien von \qq{untracked} auf \qq{staged} gesetzt.
 \begin{figure}[!h]
     \centering
     \includegraphics[width=\textwidth]{Bilder/lifecycle_de.png}
-    \caption{Die 4 Zustände, in denen eine Datei sich im git befinden kann. Die Pfeile geben an, wie die Dateien zwischen den Stadien wechseln. Das Bild wurde aus \cite{ProGit} entnommen und leicht verändert.}
+    \caption{Die 4 Zustände, in denen eine Datei sich im Git befinden kann. Die Pfeile geben an, wie die Dateien zwischen den Stadien wechseln. Das Bild wurde aus \cite{ProGit} entnommen und leicht verändert.}
     \label{fig:lifecycle}
 \end{figure}

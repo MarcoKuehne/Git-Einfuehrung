@@ -1,23 +1,5 @@
 \section{Commit}
 \subsection{Erster Commit}
-\begin{lstlisting}
-$ git status
-On branch master
-
-No commits yet
-
-Changes to be committed:
-  (use "git rm --cached <file>..." to unstage)
-	new file:   Bibliothek.bib
-	new file:   Bilder/Versioncontrol.png
-	new file:   Bilder/git_Commit.png
-	new file:   Commit.tex
-	new file:   Einleitung.tex
-	new file:   Title.tex
-	new file:   initialisierung.tex
-	new file:   main.tex
-
-\end{lstlisting}
 Um den aktuellen Status zu protokollieren muss der Befehl \inline{git commit} genutzt werden. Dabei werden alle Änderungen an allen Dateien protokolliert, die sich im Status \qq{staged} befinden.
 
 Ist eine Datei neu (war vorher also im Status \qq{untracked} wird dabei eine Kopie der Datei zwischengespeichert. Ist die Datei nur verändert wurden (war vorher somit im Status \qq{modified}) wird nur die Änderung gespeichert.
@@ -37,17 +19,17 @@ In Abb. \ref{fig:Commit-XKCD} ist ein sogenannter \qq{Commit-tree} dargestellt. 
 In Abb. \ref{fig:Commit-XKCD} sieht man jedoch, dass es zunehmend schwerer werden kann zu einem Commit eine gute Beschreibung zu finden. Wenn z.B. viele Änderungen in einem Commit zusammengefasst werden kann es schwer sein einen geeigneten Commit-header zu finden.
 
 Nachdem ein Commit erfolgt ist befinden sich alle Dateien, die vorher im staging Status waren im unmodified Status (siehe Abb. \ref{fig:lifecycle}). 
-\begin{lstlisting}
+\begin{mplisting}
 $ git status
 On branch master
 nothing to commit, working tree clean
-\end{lstlisting}
+\end{mplisting}
 %
 \subsection{Gitignore}
 In den meisten Projekten existieren Dateien, welche nicht innerhalb der Versionskontrolle verfolgt werden sollen. Im Fall dieses Latex Dokumentes z.B. sind dies die Auxilliar-Files, welche beim compilieren der PDF entstehen. Um solche Dateien nicht immer als \qq{untracked} angezeigt zu bekommen können sie explizit aus dem git ausgeschlossen werden. Dafür nutzt man eine Datei namens \inline{.gitignore}. Diese muss einfach im root Ordner des Projekts erstellt werden. Alle innerhalb dieser Datei aufgelisteten Ordner und Dateien werden nicht von git beachtet.
 
 Nach dem Kompilieren des Projektes sieht git alle auxiliar Dateien als untracked:
-\begin{lstlisting}
+\begin{mplisting}
 $ git status
 On branch master
 Untracked files:
@@ -64,9 +46,9 @@ Untracked files:
 		main.toc
 nothing added to commit but untracked files present (use "git add" to track)
 
-\end{lstlisting}
+\end{mplisting}
 fügt man diese Dateien jedoch einer \inline{.gitignore} hinzu:
-\begin{lstlisting}
+\begin{mplisting}
 $ echo "main.aux
 	main.bbl
 	main.bcf
@@ -84,14 +66,14 @@ Untracked files:
 .gitignore
 
 nothing added to commit but untracked files present (use "git add" to track)
-\end{lstlisting}
+\end{mplisting}
 ignoriert git alle aufgelisteten Dateien und findet nur noch die neue Datei \inline{.gitignore}.
 
 \subsection{Zurücksetzen auf vorhergehenden Commit}
 In diesem Abschnitt wird kurz erklärt, wie ein Verlauf der Commits angezeigt werden kann, und wie man das Projekt auf einen bestimmten Commit zurücksetzen kann.
 
 Um ein Projekt zurücksetzen zu können muss man den ziel-Commit identifizieren können. Dafür ist jedem Commit ein eineindeutiger Hash zugewiesen. Diese Hashs\footnote{Git nutzt für die Hashs SHA1 Checksummen von sogenannten \qq{blobs} der Commits. Weitere Informationen dazu können in \cite{ProGit} gefunden werden.} können mit \inline{git log} angezeigt werden:
-\begin{lstlisting}
+\begin{mplisting}
 $ git log
 commit b7c5da73f9fce4176f37c5af0e929107da168adb (HEAD -> master)
 Author: Till Hanke <till.hanke@student.uni-halle.de>
@@ -112,34 +94,34 @@ Author: Till Hanke <till.hanke@student.uni-halle.de>
 Date:   Wed Jul 29 16:13:19 2020 +0200
 
     intermediate: commit to clear git status
-\end{lstlisting}
+\end{mplisting}
 Hier sieht man einen kurzen Auszug des Projektes. Der oberste Commit ist immer der aktuelle \qq{HEAD}. Erkennbar ist es daran, dass hinter dem Hash des Commits \inline{HEAD -> master} steht. Master ist ein Verweis auf den aktuellen Branch (was das bedeutet wird in Kapitel \ref{sec:branch} erklärt).
 
 Unter dem Hash des Commits steht der Autor, welcher den Commit veröffentlicht hat (auf die Möglichkeit kooperative Gits zu führen wird in \ref{sec:coop} eingegangen) und dessen Email.
 Außerdem ist der Zeitstempel des Commits angegeben. Zuletzt und eingerückt wird der Header des Commits ausgegeben.
 
 Um eine abgekürzte Version des Logs zu sehen kann folgender Befehl genutzt werden:
-\begin{lstlisting}
+\begin{mplisting}
 $ git log --pretty=format:"%h %s" 
 b7c5da7 style: change listings style
 b0002ce add: gitignore with all aux files listed
 0165919 intermediate: commit to clear git status
 3421046 add: subsection about gitignore
 8608c08 add: final part of commit section
-bcdca21 remove: lstlisting styles removed
-\end{lstlisting}
+bcdca21 remove: mplisting styles removed
+\end{mplisting}
 
 Wenn der korrekte Hash gefunden wurde (z.B. \inline{016591903})  kann der Master Branch darauf zurückgesetzt werden indem man \inline{git reset} nutzt. Dabei muss nicht der gesamte Hash angegeben werden, sondern nur so viel, dass der Commit eindeutig identifiziert ist.
-\begin{lstlisting}
+\begin{mplisting}
 $ git reset --hard 3421046
 HEAD is now at 3421046 add: subsection about gitignore
 $ git log --pretty=format:"%h %s" 
 3421046 add: subsection about gitignore
 8608c08 add: final part of commit section
-bcdca21 remove: lstlisting styles removed
-\end{lstlisting}
+bcdca21 remove: mplisting styles removed
+\end{mplisting}
 In dem Log ist zu erkennen, dass die letzten drei Commits nun weg sind. Jedoch sind auch diese Commits hier nicht verloren, sondern können mit demselben Befehl wiederhergestellt werden. Dafür wird nur der Hash des Commits benötigt, der wiederhergestellt werden soll. Diese Commits können im erweiterten Log (\inline{git reflog}) gefunden werden:
-\begin{lstlisting}
+\begin{mplisting}
 $ git reflog
 3421046 (HEAD -> master) HEAD@{0}: reset: moving to 3421046
 b7c5da7 HEAD@{1}: commit: style: change listings style
@@ -149,8 +131,8 @@ b0002ce HEAD@{2}: commit: add: gitignore with all aux files listed
 8608c08 HEAD@{5}: reset: moving to 8608c08eddc0fb893ccd88887889900b29aa6122
 b8f2753 HEAD@{6}: commit: add: subsection about gitignore
 8608c08 HEAD@{7}: commit: add: final part of commit section
-bcdca21 HEAD@{8}: commit: remove: lstlisting styles removed
-\end{lstlisting}
+bcdca21 HEAD@{8}: commit: remove: mplisting styles removed
+\end{mplisting}
 In diesem Log sind alle Aktionen des Gits aufgelistet. Es ist zu sehen, dass der Commit, auf den der master Branch gerade verweist zweimal vorkommt (Zeile 2 und Zeile 6). Zwischen diesen beiden Einträgen sind die vorhergehenden Commits zu sehen. Es sind auch die beiden scheinbar verloren gegangenen Commits wieder zu sehen.
 
 
