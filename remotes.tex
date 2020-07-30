@@ -1,0 +1,13 @@
+\section{Remotes}
+Ein Git kann nicht nur lokal geführt werden. Wirklich effektiv werden Gits wenn man sie mit einem remote-Server verbindet. Dieser Server kann auf verschiedenste Arten erreichbar sein. Die häufigsten Methoden einen remote-Server an zu sprechen sind jedoch http(s) und ssh. 
+\subsection{Github}
+Es gibt online verschiedene Anbieter für Git-Server. \url{Github.com} ist einer der wohl bekanntesten. Um ein Projekt bei Github zu veröffentlichen (oder privat dort zu sichern) muss ein Benutzeraccount angelegt werden.
+
+In diesem Beispiel wird gezeigt, wie man ein lokales Git per SSH auf Github synchronisieren kann. Um ssh mit Github zu verwenden muss ein SSH-Key auf dem lokalen PC erstellt werden, und der öffentliche Schlüssel bei Github hinterlegt werden. Ein SSH-Key kann mit \inline{ssh-keygen} erzeugt werden. Als Standard wird dadurch ein RSA Key-Paar erzeugt und im \inline{~/.ssh/} Ordner hinterlegt.
+Es entstehen in diesem Ordner \inline{id_rsa} und \inline{id_rsa.pub} die Datei, die mit .pub endet enthält den öffentlichen Schlüssel, der weitergegeben werden kann. Die andere Datei sollte niemals weitergegeben werden. Sie enthält den privaten Schlüssel, mit dem man sich dann authentifizieren kann.
+\begin{lstlisting}
+	$ ssh-keygen  # erzeugen eines Schlüsselpaares
+	$ cat ~/.ssh/id_rsa.pub  # anzeigen des öffentlichen Schlüssels
+	ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDMuksDJfybOInEWtN+tSxLmjT/wG5q6ZY4aZFRBlhoho865XwJZZm1DAdL0Ec9Lt1DfHfAhX9QOTlJW1qXX6dn1dtD5ih6n41tdxpxxJ/P2a6YHGGKYQ0p7qSqzS5ydu+GST73lWxK8eDrU8Tm+lDRpyGu4GRqph5gemFyzW11AD2OknWcm+Zp9ghHWUZuGGH8KqYWAHjkMDuZZMchC4f7IhrVZwhiiWFMyS7BEaIb8FrKtpTnjeoH4qkaHNr8umFxatZRLYqHMrx/JA0/4JwLFNOtZTVTl220Nst5+cCx54ZhDHi1AeROMZ5xwBPiYHi3eBsEfHZBt6euJNWcdVoq6bZK+ImXA1IszqevJNu571g9sBHjOtkgrXVoYVicnCwGYI2Fnd4VRjPV+4xSLnizqr0fMvXlGdTvlyXML4gA+eyYwBF83xQ35F2e8FA+dGCzyGL7A/zd1yDh1jVgsiQMVwuA3xVEGWnVzo6kXk/qCuMaIivLi3R9vuokdwL+iak= till@phys-87
+\end{lstlisting}
+Dieser öffentliche Schlüssel kann nun bei Github unter \inline{settings -> SSH and GPG keys -> New SSH key} eingegeben werden. 
