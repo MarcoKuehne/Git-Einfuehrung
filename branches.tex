@@ -33,4 +33,23 @@ Abb. \ref{fig:branch_1} zeigt den Branch-tree des Gits nach dem ersten Commit in
 Das Zusammenführen zweier Branches wird Merging genannt. Dabei ist es das Ziel, alle Änderungen der beiden Branches in einem Branch zu vereinen. Wichtig ist, dass immer der Branch ausgewählt (HEAD zeigt darauf) sein sollte, in dem man die Änderungen vereinen will. Will man also in master die Änderungen von section4 einbinden geht das folgendermaßen:
 \begin{lstlisting}
 	$ git checkout master
+	$ git merge section4
+	Merge made by the 'recursive' strategy.
+	Bilder/branching.png   | Bin 0 -> 25763 bytes
+	Bilder/branching.svg   | 648 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	Bilder/branching_2.png | Bin 0 -> 41671 bytes
+	branches.tex           |  36 +++++
+	main.tex               |   3 +-
+	5 files changed, 686 insertions(+), 1 deletion(-)
+	create mode 100644 Bilder/branching.png
+	create mode 100644 Bilder/branching.svg
+	create mode 100644 Bilder/branching_2.png
+	create mode 100644 branches.tex
 \end{lstlisting}
+Merging ist ein einzelner Commit. Dieser Commit zeigt auf die beiden Commits, auf welche die einzelnen Branches vorher gezeigt haben (siehe Abb. \ref{fig:merge}). Nachdem ein Branch gemerged wurde kann er gelöscht werden.
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{Bilder/branching_3.png}
+	\caption{Branch-tree nach dem Merging. Der Merge wird als eigener Commit oberhalb der beiden child-Commits angezeigt. Der master Branch und HEAD zeigen beide auf den Merge-Commit. Der section4 Branch existiert weiterhin, zeigt jedoch auf den alten Commit.}
+	\label{fig:merge}
+\end{figure}
