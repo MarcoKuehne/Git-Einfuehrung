@@ -27,11 +27,11 @@ Dadurch wird in dem aktuellen Verzeichnis ein \inline{.git} Ordner angelegt.
 %
 \subsection{Git Config}
 Um Änderungen zu protokollieren benötigt Git Informationen über den User. Diese Informationen können System-übergreifend, pro User oder für das jeweilige Projekt hinterlegt werden. Die benötigten Informationen sind Email-Adresse und Benutzername. Definiert werden können die Informationen mithilfe von \inline{git config}. Durch die Angabe einer Option wird definiert ob diese Information für das System (\inline{--system}), den User (\inline{--global}) oder das Projekt (\inline{--local}) abgespeichert werden sollen.
-\begin{mplisting}
+\begin{lstlisting}[breaklines=true]
 $ git config --global user.name "Max Mustermann"
 $ git config --global user.email "max@mustermann.de"
 $ git config --global core.editor vim  # Dieser Editor wird von git genutzt um Eingaben des Users ab zu fragen.
-\end{mplisting}
+\end{lstlisting}
 Nach der Initialisierung kann der Status des Git mit \inline{git status} abgefragt werden.
 \begin{mplisting}
 $ ls -a

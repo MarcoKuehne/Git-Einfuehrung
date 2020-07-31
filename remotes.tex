@@ -1,9 +1,9 @@
 \section{Remotes}
-Ein Git kann nicht nur lokal geführt werden. Wirklich effektiv werden Gits wenn man sie mit einem remote-Server verbindet. Dieser Server kann auf verschiedenste Arten erreichbar sein. Die häufigsten Methoden einen remote-Server an zu sprechen sind jedoch http(s) und ssh. 
+Ein Git kann nicht nur lokal geführt werden. Wirklich effektiv werden Gits wenn man sie mit einem remote-Server verbindet und somit mit anderen Personen teilen kann. Der Server kann auf verschiedenste Arten erreichbar sein. Die häufigsten Methoden einen remote-Server an zu sprechen sind jedoch http(s) und ssh. 
 \subsection{Github}
-Es gibt online verschiedene Anbieter für Git-Server. \url{Github.com} ist einer der wohl bekanntesten. Um ein Projekt bei Github zu veröffentlichen (oder privat dort zu sichern) muss ein Benutzeraccount angelegt werden.
+Es gibt online verschiedene Anbieter für Git-Server. \url{Github.com} ist einer der wohl bekanntesten. Um ein Projekt bei Github zu veröffentlichen (oder privat dort zu sichern) muss lediglich ein Benutzeraccount angelegt werden.
 
-In diesem Beispiel wird gezeigt, wie man ein lokales Git per SSH auf Github synchronisieren kann. Um ssh mit Github zu verwenden muss ein SSH-Key auf dem lokalen PC erstellt werden, und der öffentliche Schlüssel bei Github hinterlegt werden. Ein SSH-Key kann mit \inline{ssh-keygen} erzeugt werden. Als Standard wird dadurch ein RSA Key-Paar erzeugt und im \inline{/home/user/.ssh/} Ordner hinterlegt.
+In diesem Beispiel wird gezeigt, wie man ein lokales Git per SSH auf Github synchronisieren (\qq{pushen}) kann und Github somit als Remote ein zu richten. Um ssh mit Github zu verwenden muss ein SSH-Schlüssel auf dem lokalen PC erstellt werden, und der öffentliche Schlüssel bei Github hinterlegt werden. Ein SSH-Schlüssel kann mit \inline{ssh-keygen} erzeugt werden. Als Standard wird dadurch ein RSA Schlüssel-Paar erzeugt und im \inline{/home/user/.ssh/} Ordner hinterlegt.
 Es entstehen in diesem Ordner \inline{id_rsa} und \inline{id_rsa.pub} die Datei, die mit .pub endet enthält den öffentlichen Schlüssel, der weitergegeben werden kann. Die andere Datei sollte niemals weitergegeben werden. Sie enthält den privaten Schlüssel, mit dem man sich dann authentifizieren kann.
 \begin{mplisting}
 $ ssh-keygen  # erzeugen eines Schlüsselpaares
@@ -18,15 +18,15 @@ BPiYHi3eBsEfHZBt6euJNWcdVoq6bZK+ImXA1IszqevJNu571g9sBHjOtkgrXVoYVicnC
 wGYI2Fnd4VRjPV+4xSLnizqr0fMvXlGdTvlyXML4gA+eyYwBF83xQ35F2e8FA+dGCzyGL
 7A/zd1yDh1jVgsiQMVwuA3xVEGWnVzo6kXk/qCuMaIivLi3R9vuokdwL+iak= till@phys-87
 \end{mplisting}
-Dieser öffentliche Schlüssel kann nun bei Github unter \inline{settings -> SSH and GPG keys -> New SSH key} eingegeben werden. Damit kann man von dem Rechner aus, auf dem der Schlüssel erzeugt wurde, auf jedes Github Repository des Benutzeraccounts zugreifen.
+Dieser öffentliche Schlüssel kann nun bei Github unter \inline{settings -> SSH and GPG keys -> New SSH key} eingegeben werden. Damit kann man von dem Rechner aus, auf dem der Schlüssel hinterlegt ist, auf jedes Github Repository des Benutzeraccounts zugreifen.
 
 \subsection{Remote hinzufügen}
-Mit \inline{git remote} kann man alle verknüpften Remotes auflisten lassen. Um ein Github Repository als Remote mit dem lokalen Git zu verknüpfen muss zuerst ein Github Repository online erstellt werden. Diesem neuen Repository muss ein Name gegeben werden, nach der Erstellung kann das lokale Repository mit Github verbunden werden.
+Mit \inline{git remote} kann man alle verknüpften Remotes auflisten lassen (wenn keine Remotes eingerichtet sind sollte das also keine Ausgabe erzeugen). Um ein Github Repository als Remote mit dem lokalen Repository zu verknüpfen muss zuerst ein Github Repository online erstellt werden. Diesem neuen Repository wird ein Name gegeben, nach der Erstellung kann das lokale Repository mit Github verbunden werden.
 \begin{mplisting}
-$ git remote add github git@github.com:[Benutzername]/[Github Projektname].git
+$ git remote add github git@github.com:[Benutzername]/[Github Repo Name].git
 $ git remote
 \end{mplisting} 
-Dabei muss dem remote ein Name gegeben werden (hier \inline{github}) und der Link zu dem remote Repository angegeben werden (bestehend aus dem Benutzername und dem Namen des Github Repository). \inline{git remote} sollte daraufhin den Namen des gerade hinzugefügten remotes auflisten (\inline{github}). Damit ist das lokale Repository jedoch noch nicht auf Github zu sehen. Um den aktuellen Stand des lokalen Repositories zu Github zu pushen muss \inline{git push} genutzt werden.
+Dabei muss der remote Verknüpfung ein Name gegeben werden (hier \inline{github}) und der Link zu dem remote Repository angegeben werden (bestehend aus dem Benutzername und dem Namen des Github Repository). \inline{git remote} sollte daraufhin den Namen des gerade hinzugefügten remotes auflisten (\inline{github}). Damit ist das lokale Repository jedoch noch nicht auf Github zu sehen. Um den aktuellen Stand des lokalen Repositories zu Github zu pushen muss \inline{git push} genutzt werden.
 \begin{mplisting}
 $ git push github master
 \end{mplisting}
