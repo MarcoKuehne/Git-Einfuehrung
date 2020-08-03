@@ -1,32 +1,32 @@
 \section{Commit}
 \subsection{Erster Commit}\label{sec:first_commit}
-Um den aktuellen Status zu protokollieren wird der Befehl \inline{git commit} genutzt. Dabei werden alle Änderungen an allen Dateien protokolliert, die sich im Status \qq{staged} befinden.
+Um den aktuellen Status zu protokollieren, wird der Befehl \inline{git commit} genutzt. Dabei werden alle Änderungen an allen Dateien protokolliert, die sich im Status \qq{staged} befinden.
 
-Ist eine Datei neu (war vorher also im Status \qq{untracked}) wird dabei eine Kopie der Datei in \inline{.git} abgelegt. Ist die Datei nur verändert wurden (war vorher somit im Status \qq{modified}) wird nur die Information über die Änderung gespeichert.
+Ist eine Datei neu (war vorher also im Status \qq{untracked}) wird dabei eine Kopie der Datei in \inline{.git} abgelegt. Ist die Datei nur verändert wurden (war vorher somit im Status \qq{modified}) , wird nur die Information über die Änderung gespeichert.
 
 Ein Commit besteht aus mehreren Teilen: 
 \begin{itemize}
-	\item Ein tree Objekt, welches den Hash des Aktuellen Zustands des Projektes angibt
-	\item Ein \qq{parent} Objekt, der Hash des \qq{parent} Commits
+	\item ein tree Objekt, welches den Hash des aktuellen Zustands des Projektes angibt
+	\item ein \qq{parent} Objekt, der Hash des \qq{parent} Commits
 	\item Name und Email-Adresse des Autors
 	\item Name und Email-Adresse des Committers
 	\item Head der Commit-Message (CM)
 \end{itemize}
 CM sollten möglichst einheitlich und übersichtlich gestaltet werden. Für Programmcodes gibt \cite{conv-Commit} eine gute Zusammenfassung, wie CM strukturiert werden können\footnote{In dem Beispiel git zu diesem Bericht wird davon jedoch nicht vollständig Gebrauch gemacht, da es für Latex Dokumente nicht geeignet ist.}.
 
-Wenn der Befehl \inline{git commit} ohne Optionen ausgeführt wird öffnet sich automatisch der Standard-Editor, welcher über \inline{git config --local core.editor} definiert wurde. In diesem befindet sich eine auskommentierte Übersicht des Commits. Darunter muss eine CM eingefügt werden. Wird der Editor geschlossen ohne, dass neue Zeilen hinzugefügt wurden bricht der Commit ab.
+Wenn der Befehl \inline{git commit} ohne Optionen ausgeführt wird, öffnet sich automatisch der Standard-Editor, welcher über \inline{git config --local core.editor} definiert wurde. In diesem befindet sich eine auskommentierte Übersicht des Commits. Darunter muss eine CM eingefügt werden. Wird der Editor geschlossen ohne, dass neue Zeilen hinzugefügt wurden, bricht der Commit ab.
 \begin{figure}[!h]
         \centering
         \includegraphics[width=0.5\textwidth]{Bilder/git_commit.png}
-        \caption{Eine Commit-Baum-Darstellung von XKCD \cite{Munroe}. Die CM starten oben mit den ersten Commits sehr vorbildlich. Nach einigen Commits ist zu sehen, dass die CM keine Informationen über den Commit Inhalt mehr haben. Dies ist ein häufiges Problem, wenn zu selten committed wird kann es schnell passieren, dass nicht mehr klar ist, was sich seit dem letzten Commit alles geändert hat. Dadurch werden CM schnell schwer zu schreiben und vernachlässigt.}
+        \caption{Eine Commit-Baum-Darstellung von XKCD \cite{Munroe}. Die CM starten oben mit den ersten Commits sehr vorbildlich. Nach einigen Commits ist zu sehen, dass die CM keine Informationen über den Commit Inhalt mehr haben. Dies ist ein häufiges Problem. Wenn zu selten committed wird, kann es schnell passieren, dass nicht mehr klar ist, was sich seit dem letzten Commit alles geändert hat. Dadurch werden CM schnell schwer zu schreiben und vernachlässigt.}
         \label{fig:Commit-XKCD}
 \end{figure}
 
-In Abb. \ref{fig:Commit-XKCD} ist ein sogenannter Commit-Baum dargestellt. In einem Commit-Baum werden alle existierenden Commits aufgelistet und \qq{parent} und \qq{child} Commit miteinander verbunden. Neben jedem Commit wird der jeweilige Commit-Header angezeigt. Solch ein Commit-Baum sollte eine gute Übersicht über den Verlauf der Entwicklung eines Programms geben. Daher müssen Commit-Header möglichst eindeutig und einheitlich verfasst werden.
+In Abb. \ref{fig:Commit-XKCD} ist ein sogenannter Commit-Baum dargestellt. In einem Commit-Baum werden alle existierenden Commits aufgelistet sowie \qq{parent} und \qq{child} Commit miteinander verbunden. Neben jedem Commit wird der jeweilige Commit-Header angezeigt. Solch ein Commit-Baum sollte eine gute Übersicht über den Verlauf der Entwicklung eines Programms geben. Daher müssen Commit-Header möglichst eindeutig und einheitlich verfasst werden.
 
-In Abb. \ref{fig:Commit-XKCD} sieht man jedoch, dass es zunehmend schwerer werden kann zu einem Commit eine gute Beschreibung zu finden. Wenn z.B. viele Änderungen in einem Commit zusammengefasst werden kann es schwer sein einen geeigneten Commit-Header zu finden.
+In Abb. \ref{fig:Commit-XKCD} ist jedoch zu sehen, dass es zunehmend schwerer werden kann, zu einem Commit eine gute Beschreibung zu finden. Wenn z.B. viele Änderungen in einem Commit zusammengefasst werden, wird es umständlicher einen geeigneten Commit-Header zu finden.
 
-Nachdem ein Commit erfolgt ist befinden sich alle Dateien, die vorher im \qq{staging} Status waren im \qq{unmodified} Status (siehe Abb. \ref{fig:lifecycle}). 
+Nachdem ein Commit erfolgt ist, befinden sich alle Dateien, die vorher im \qq{staging} Status waren im \qq{unmodified} Status (siehe Abb. \ref{fig:lifecycle}). 
 \begin{mplisting}
 $ git status
 On branch master
@@ -34,7 +34,7 @@ nothing to commit, working tree clean
 \end{mplisting}
 %
 \subsection{Gitignore}
-In den meisten Projekten existieren Dateien, welche nicht innerhalb der Versionskontrolle verfolgt werden sollen. Im Fall dieses Latex Dokumentes z.B. sind dies die Auxilliar-Dateien, welche beim compilieren der PDF entstehen. Um solche Dateien nicht immer als \qq{untracked} angezeigt zu bekommen können sie explizit aus dem Repository ausgeschlossen werden. Dafür nutzt man eine Datei namens \inline{.gitignore}. Diese muss im root Ordner des Repositories erstellt werden. Alle innerhalb dieser Datei aufgelisteten Ordner und Dateien werden nicht von Git beachtet.
+In den meisten Projekten existieren Dateien, welche nicht innerhalb der Versionskontrolle verfolgt werden sollen. Im Fall dieses Latex Dokumentes z.B. sind dies die Auxiliar-Dateien, welche beim kompilieren der PDF entstehen. Um solche Dateien nicht immer als \qq{untracked} angezeigt zu bekommen, können sie explizit aus dem Repository ausgeschlossen werden. Dafür nutzt man eine Datei namens \inline{.gitignore}. Diese muss im root Ordner des Repositories erstellt werden. Alle innerhalb dieser Datei aufgelisteten Ordner und Dateien werden nicht von Git beachtet.
 
 Nach dem Kompilieren des Projektes sieht Git alle Auxiliar-Dateien als \qq{untracked}:
 \begin{mplisting}
@@ -80,7 +80,7 @@ ignoriert Git alle aufgelisteten Dateien und findet nur noch die neue Datei \inl
 \subsection{Zurücksetzen auf vorhergehenden Commit}
 In diesem Abschnitt wird kurz erklärt, wie man das Projekt auf einen bestimmten Commit zurücksetzen kann.
 
-Um ein Projekt zurücksetzen zu können, muss der Ziel-Commit identifiziert werden können. Dafür ist jedem Commit ein eindeutiger Hash-Wert zugewiesen. Eine liste dieser Hashs\footnote{Git nutzt für die Hashs SHA1 Checksummen von den Commit-Objekten. Weitere Informationen dazu können in \cite{ProGit} gefunden werden.} kann mit \inline{git log} angezeigt werden:
+Um ein Projekt zurücksetzen zu können, muss der Ziel-Commit identifiziert werden können. Dafür ist jedem Commit ein eindeutiger Hash-Wert zugewiesen. Eine Liste dieser Hashs\footnote{Git nutzt für die Hashs SHA1 Checksummen von den Commit-Objekten. Weitere Informationen dazu können in \cite{ProGit} gefunden werden.} kann mit \inline{git log} angezeigt werden:
 \begin{mplisting}
 $ git log
 commit b7c5da73f9fce4176f37c5af0e929107da168adb (HEAD -> master)
@@ -103,12 +103,12 @@ Date:   Wed Jul 29 16:13:19 2020 +0200
 
     intermediate: commit to clear git status
 \end{mplisting}
-Hier is ein kurzer Auszug des Logs zu sehen. Der oberste Commit ist der aktuelle \qq{HEAD}, d.h. der letzte Commit. Erkennbar ist es daran, dass hinter dem Hash des Commits \inline{HEAD -> master} steht. \inline{master} ist ein Verweis auf den aktuellen Branch (was das bedeutet wird in Kapitel \ref{sec:branch} erklärt).
+Hier is ein kurzer Auszug des Logs zu sehen. Der oberste Commit ist der aktuelle \qq{HEAD}, d.h. der letzte Commit. Erkennbar ist es daran, dass hinter dem Hash des Commits \inline{HEAD -> master} steht. \inline{master} ist ein Verweis auf den aktuellen Branch (Näheres dazu, wird in Kapitel \ref{sec:branch} erklärt).
 
 Unter dem Hash des Commits steht der Autor, welcher den Commit veröffentlicht hat und dessen Email-Adresse.
 Außerdem ist der Zeitstempel des Commits angegeben. Zuletzt und eingerückt wird der Header der CM ausgegeben.
 
-Um eine abgekürzte Version des Logs zu sehen sind folgende Optionen hilfreich:
+Um eine abgekürzte Version des Logs zu sehen, sind folgende Optionen hilfreich:
 \begin{mplisting}
 $ git log --pretty=format:"%h %s" 
 b7c5da7 style: change listings style
@@ -119,7 +119,7 @@ b0002ce add: gitignore with all aux files listed
 bcdca21 remove: mplisting styles removed
 \end{mplisting}
 
-Wenn der korrekte Hash gefunden wurde (z.B. \inline{016591903}) kann der Master Branch darauf zurückgesetzt werden indem man \inline{git reset} nutzt. Dabei muss nicht der gesamte Hash angegeben werden, sondern nur so viel, dass der Commit eindeutig identifiziert ist.
+Wenn der korrekte Hash gefunden wurde (z.B. \inline{016591903}) kann der Master Branch darauf zurückgesetzt werden, indem \inline{git reset} genutzt wird. Dabei muss nicht der gesamte Hash angegeben werden, sondern nur so viel, dass der Commit eindeutig identifiziert ist.
 \begin{mplisting}
 $ git reset --hard 3421046
 HEAD is now at 3421046 add: subsection about gitignore
@@ -141,7 +141,7 @@ b8f2753 HEAD@{6}: commit: add: subsection about gitignore
 8608c08 HEAD@{7}: commit: add: final part of commit section
 bcdca21 HEAD@{8}: commit: remove: mplisting styles removed
 \end{mplisting}
-In diesem Log sind alle Aktionen des lokalen Repositories aufgelistet. Es ist zu sehen, dass der Commit, auf den der \inline{master} Branch gerade verweist zweimal vorkommt (Zeile 2 und Zeile 6). Zwischen diesen beiden Einträgen sind die vorhergehenden Commits zu sehen.
+In diesem Log sind alle Aktionen des lokalen Repositories aufgelistet. Es ist zu sehen, dass der Commit, auf den der \inline{master} Branch gerade verweist, zweimal vorkommt (Zeile 2 und Zeile 6). Zwischen diesen beiden Einträgen sind die vorhergehenden Commits zu sehen.
 
 
 

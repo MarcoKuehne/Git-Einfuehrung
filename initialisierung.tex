@@ -1,5 +1,5 @@
 \section{Initialisierung eines lokalen .git}
-Git muss in dem Hauptordner eines Projektes initialisiert werden. Das bedeutet, dass alle Projekt-Dateien in Unterordnern zu finden sein müssen (eine Exemplarische Ordnerstruktur ist in \ref{fig:dir_struc} dargestellt). Bei der Initialisierung von Git wird im Hauptordner zusätzlich ein neuer Unterordner  \inline{.git/} angelegt. In diesem Ordner wird Git alle Versionsinformationen und die Historie abspeichern. Durch Löschen des Ordners kann man Git von dem Projekt trennen.
+Git muss in dem Hauptordner eines Projekts initialisiert werden. Das bedeutet, dass alle Projekt-Dateien in Unterordnern zu finden sein müssen (eine exemplarische Ordnerstruktur ist in \ref{fig:dir_struc} dargestellt). Bei der Initialisierung von Git wird im Hauptordner zusätzlich ein neuer Unterordner  \inline{.git/} angelegt. In diesem Ordner wird Git alle Versionsinformationen und die Historie abspeichern. Durch Löschen des Ordners wird Git von dem Projekt getrennt.
 \begin{figure}[!h]
     \dirtree{%
     .1 Git-Basics.
@@ -19,14 +19,14 @@ Git muss in dem Hauptordner eines Projektes initialisiert werden. Das bedeutet, 
     \label{fig:dir_struc}
 \end{figure}
 
-Um in einem Projektordner Git zu initialisieren genügt der Befehl 
+Um in einem Projektordner Git zu initialisieren, genügt der Befehl. 
 \begin{mplisting}
 $ git init
 \end{mplisting}
 Dadurch wird in dem aktuellen Verzeichnis ein \inline{.git} Ordner angelegt.
 %
 \subsection{Git Config}
-Um Änderungen zu protokollieren benötigt Git Informationen über den User. Diese Informationen können System-übergreifend, pro User oder für das jeweilige Projekt hinterlegt werden. Die benötigten Informationen sind Email-Adresse und Benutzername. Definiert werden können die Informationen mithilfe von \inline{git config}. Durch die Angabe einer Option wird definiert ob diese Information für das System (\inline{--system}), den User (\inline{--global}) oder das Projekt (\inline{--local}) abgespeichert werden sollen.
+Um Änderungen zu protokollieren, benötigt Git Informationen über den User. Diese Informationen können System-übergreifend pro User oder für das jeweilige Projekt hinterlegt werden. Die benötigten Informationen sind eine Email-Adresse und ein Benutzername. Definiert werden die Informationen mithilfe von \inline{git config}. Durch die Angabe einer Option wird definiert, ob diese Information für das System (\inline{--system}), den User (\inline{--global}) oder das Projekt (\inline{--local}) abgespeichert werden sollen.
 \begin{lstlisting}[breaklines=true]
 $ git config --global user.name "Max Mustermann"
 $ git config --global user.email "max@mustermann.de"
@@ -55,7 +55,7 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
 
 \end{mplisting}
-Durch diese Initialisierung wurde ein leeres Git-Repository angelegt. Jedoch hat das Repository noch keine Dateien, deren Verlauf protokolliert werden soll. Um Dateien der Versionskontrolle hinzu zu fügen müssen diese zum Repository hinzugefügt werden. Das geschieht über den \inline{git add} Befehl.
+Durch diese Initialisierung wird ein leeres Git-Repository angelegt. Jedoch hat das Repository noch keine Dateien, deren Verlauf protokolliert werden soll. Um Dateien der Versionskontrolle hinzuzufügen, wird der  \inline{git add} Befehl genutzt.
 \begin{mplisting}
 $ git add main.tex
 $ git status
@@ -76,7 +76,9 @@ Untracked files:
 	Title.tex
 	initialisierung.tex
 \end{mplisting}
-Um alle Dateien des Ordners, und der Unterordner dem Repository hinzu zu fügen kann man den Hauptordner hinzufügen.
+Um alle Dateien des Ordners und der Unterordner dem Repository hinzuzufügen, kann man den Hauptordner hinzufügen.
+%
+%ÜBERARBEITEN
 \begin{mplisting}
 $ git add .
 $ git status
