@@ -55,7 +55,16 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
 
 \end{mplisting}
-Durch diese Initialisierung wird ein leeres Git-Repository angelegt. Jedoch hat das Repository noch keine Dateien, deren Verlauf protokolliert werden soll. Um Dateien der Versionskontrolle hinzuzufügen, wird der  \inline{git add} Befehl genutzt.
+Durch diese Initialisierung wird ein leeres Git-Repository angelegt. 
+Es ist zu erkennen, dass alle Dateien des Projektes als \qq{untracked} erkannt wurden. Dies ist einer von 4 verschiedenen Zuständen, in die Git Dateien sortiert. Eine Übersicht der 4 Zustände ist in Abb. \ref{fig:lifecycle} dargestellt.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{Bilder/lifecycle_de.png}
+	\caption{Die 4 Zustände, in denen eine Datei sich im Git befinden kann. Die Pfeile geben an, wie die Dateien zwischen den Stadien wechseln. Das Bild wurde aus \cite{ProGit} entnommen und leicht verändert.}
+	\label{fig:lifecycle}
+\end{figure}
+
+Um Änderungen von Dateien zu protokollieren, müssen die gewünschten Dateien auf \qq{staged} gesetzt werden. Das geschieht mithilfe des   \inline{git add} Befehls.
 \begin{mplisting}
 $ git add main.tex
 $ git status
@@ -76,9 +85,7 @@ Untracked files:
 	Title.tex
 	initialisierung.tex
 \end{mplisting}
-Um alle Dateien des Ordners und der Unterordner dem Repository hinzuzufügen, kann man den Hauptordner hinzufügen.
-%
-%ÜBERARBEITEN
+\inline{git status} zeigt direkt, wie man Dateien wieder \qq{unstaged} setzen kann. Als nächstes sollen jedoch alle Dateien, die \qq{untracked} sind \qq{staged} werden. Damit wir nicht alle Dateien einzeln aufrufen müssen, kann der gesamte Projektordner \qq{staged} gesetzt werden:
 \begin{mplisting}
 $ git add .
 $ git status
@@ -98,10 +105,4 @@ Changes to be committed:
 	new file:   main.tex
 
 \end{mplisting}
-Damit wurden alle Dateien der Versionskontrolle hinzugefügt. In Git nennt sich der Zustand, in dem die Dateien sich hier befinden \qq{Staging}. Noch hat Git die Änderungen nicht protokolliert, sondern nur die Dateien markiert um sie bei dem nächsten Commit zu protokollieren. Die vier Stadien, in denen sich eine Datei in Git befinden kann sind in Abb. \ref{fig:lifecycle} dargestellt. Der \inline{git add} Befehl hat die Dateien von \qq{untracked} auf \qq{staged} gesetzt.
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=\textwidth]{Bilder/lifecycle_de.png}
-    \caption{Die 4 Zustände, in denen eine Datei sich im Git befinden kann. Die Pfeile geben an, wie die Dateien zwischen den Stadien wechseln. Das Bild wurde aus \cite{ProGit} entnommen und leicht verändert.}
-    \label{fig:lifecycle}
-\end{figure}
+Damit wurden alle Dateien \qq{gestaged}. Noch hat Git die Änderungen nicht protokolliert, sondern nur die Dateien markiert um sie bei dem nächsten Commit zu protokollieren. Dateien, die keine unprotokollierten Änderungen haben befinden sich im Status \qq{unmodified}. Alle \qq{staged} Dateien werden durch den Commit in \qq{unmodified} überführt.
