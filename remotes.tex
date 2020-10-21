@@ -31,3 +31,13 @@ Dabei muss der remote Verknüpfung ein Name gegeben (hier \inline{github}) und d
 $ git push github master
 \end{mplisting}
 \inline{git push} benötigt mindestens zwei Argumente. Das erste Argument gibt den remote an, zu dem gepushed werden soll (es können mit einem lokalen Repository mehrere remotes verbunden werden). Das zweite Argument gibt den Branch an, der gepushed werden soll. Durch diesen Befehl wird der lokale Branch mit dem remote Branch gemerged. Falls das remote Repository diesen Branch noch nicht hat, wird dieser erzeugt.
+
+\subsection{Remotes auf lokale Maschine clonen}
+Um ein existierendes Remote auf die lokale Maschine zu clonen wird \inline{git clone} genutzt. Hier ist wieder zu beachten, wie auf den Remote Server zugegriffen werden kann. Wenn ein SSH-key der lokalen Maschine auf dem Server (z.B. Github) hinterlqegt ist kann ssh genutzt werden:
+\begin{mplisting}
+$ git clone git@github.com:[Benutzername]/[Github Repo Name].git
+\end{mplisting}
+Dieser Befehl klont das Git vom Server in einen neuen Ordner auf der lokalen Maschine mit dem Namen des Gits. Alternativ kann ein Zielordner angegeben werden:
+\begin{mplisting}
+$ git clone git@github.com:[Benutzername]/[Github Repo Name].git [Pfad zum Zielordner]
+\end{mplisting}
